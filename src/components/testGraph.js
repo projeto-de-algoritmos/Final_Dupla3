@@ -180,4 +180,4 @@ console.log(printGraph(g));
 
 console.log('----------------------------------------------')
 const distances = tableDistances(g);
-console.log(distances);0
+console.log(distances);

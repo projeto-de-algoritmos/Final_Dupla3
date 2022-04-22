@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cover {
+  height: 250px;
+}
+
+.cover-title {
+  color: #274472;
+  font-weight: 500;
+  text-align: center;
+  font-size: 70px;
+  margin-top: 10%;
+}
+
+.cover-text {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: black;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.graph-button {
+  background-color: #274472;
+  color: white;
+  font-weight: 600;
+  border: solid 2px #274472;
+  border-radius: 10px !important;
+  padding: 15px 25px 15px 25px;
+}
+
+.graph-button:hover {
+  background-color: white;
+  color: #274472;
+  font-weight: 600;
+  border: solid 2px black;
+  border-radius: 10px !important;
+  padding: 15px 25px 15px 25px;
+}
+
+.node {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.node label {
+  color: black;
+  font-weight: 500;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.node input {
+  height: 30px;
+  border: solid 1.5px black;
+  border-radius: 10px !important;
+  width: 50px;
+  margin-left: 10px;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mrg-top-20 {
+  margin-top: 20px;
+}
+
+.mrg-right-10 {
+  margin-right: 10px;
+}
+
+.shortest-path {
+  color: #274472;
+  font-size: 25px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
