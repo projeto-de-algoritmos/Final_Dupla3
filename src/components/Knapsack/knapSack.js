@@ -49,20 +49,39 @@ const knapSack = (foods, bag_weight) => {
 
     const selectedFoods = [];
     let m = bag_weight;
-    let actual_bag_weight  = 0;
+    let totalWeight = 0;
 
     for (let i = qtdItens - 1; i >= 1; i--) {
         if (selection[i][m] === 1) {
-            console.log(foods[i].name, foods[i].life, foods[i].weight);
+            //console.log(foods[i].name, foods[i].life, foods[i].weight);
             selectedFoods.push(foods[i]);
-            actual_bag_weight += foods[i].weight;
+            totalWeight += foods[i].weight;
             m = m - foods[i].weight;
         }
     }
 
-    let bestValue = M[qtdItens-1][bag_weight];
-    console.log({ 'bestValue': bestValue, 'selectedFoods': selectedFoods })
-    return { 'totalLife': bestValue, 'totalWeight': actual_bag_weight, 'selectedFoods': selectedFoods };
+    const totalLife = M[qtdItens - 1][bag_weight];
+    return { totalLife, totalWeight, selectedFoods };
 }
 
-export default knapSack;
+
+const generateKnapSack = (foodsPerRegion, bag_weight) => {
+    const bestKnapsacks = [];
+    for (let i = 0; i < foodsPerRegion.length; i++) {
+        const knapsack = knapSack(foodsPerRegion[i], bag_weight);
+        console.log(knapsack)
+        bestKnapsacks.push(knapsack);
+    }
+
+    return bestKnapsacks;
+}
+export default generateKnapSack;
+
+
+/*
+Função para saber os melhores alimentos a serem escolhidos de acordo com o tamanho da mochila do personagem escolhido
+
+Retorna um array com os melhores alimentos de cada regiao (12 arrays dos melhores alimentos)
+
+generateKnapSack(foodsPerRegion, bag_weight)
+*/

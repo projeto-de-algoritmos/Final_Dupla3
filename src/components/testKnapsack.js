@@ -151,7 +151,6 @@ const getRandomFoods = (foods) => {
         const random = foods[(Math.random() * foods.length) | 0];
         randomFoods.push(random);
     }
-    console.log(randomFoods)
     return randomFoods;
 }
 
@@ -159,7 +158,7 @@ const getRandomFoods = (foods) => {
 const generateFoodsPerRegion = (foods) => {
     const foodsPerRegion = [];
 
-    for (let i=0; i<=2; i++) {
+    for (let i = 0; i <= 2; i++) {
         const regionFoods = getRandomFoods(foods);
         foodsPerRegion.push(regionFoods);
     }
@@ -209,19 +208,39 @@ const knapSack = (foods, bag_weight) => {
 
     const selectedFoods = [];
     let m = bag_weight;
+    let totalWeight = 0;
 
     for (let i = qtdItens - 1; i >= 1; i--) {
         if (selection[i][m] === 1) {
+            //console.log(foods[i].name, foods[i].life, foods[i].weight);
             selectedFoods.push(foods[i]);
-            m = m - foods[i].peso;
+            totalWeight += foods[i].weight;
+            m = m - foods[i].weight;
         }
     }
 
-    let bestValue = M[qtdItens - 1][bag_weight];
-    return { 'bestValue': bestValue, 'selectedFoods': selectedFoods };
+    const totalLife = M[qtdItens - 1][bag_weight];
+    return { totalLife, totalWeight, selectedFoods };
 }
 
-const M = knapSack(foods, characters[0].bag);
-console.log(M)
 
-console.log(generateFoodsPerRegion(foods));
+const generateKnapSack = (foodsPerRegion, bag_weight) => {
+    const bestKnapsacks = [];
+    for (let i = 0; i < foodsPerRegion.length; i++) {
+        const knapsack = knapSack(foodsPerRegion[i], bag_weight);
+        console.log(knapsack)
+        bestKnapsacks.push(knapsack);
+    }
+
+    return bestKnapsacks;
+}
+
+// const M = knapSack(foods, characters[0].bag);
+// console.log(M)
+
+const f = generateFoodsPerRegion(foods)
+//console.log(f[0])
+
+const bestKnapSack = generateKnapSack(f, characters[0].bag);
+
+console.log(bestKnapSack[0].selectedFoods)

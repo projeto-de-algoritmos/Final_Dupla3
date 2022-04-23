@@ -33,3 +33,10 @@ const generateDistances = (graph, qtd) => {
 }
 
 export default generateDistances;
+
+/*
+Passo único
+depois de gerar o grafo estático, essa é a função para gerar as distancias aleatorias
+generateDistances(graph, qtd);
+-> essa quantidade é o valor máximo que as distâncias podem ser
+*/

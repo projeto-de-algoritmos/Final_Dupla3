@@ -58,5 +58,18 @@ const staticMap = (graph) => {
 
 
 export default {
-    createGraph, staticMap
+    createGraph, generateNodes, staticMap
 }
+
+/*
+Passo 1: Gerar grafo
+createGraph()
+
+Passo 2: Gerar Nós (eles já estão com o número fixo pro grafo)
+
+generateNodes()
+
+Passe 3: gerar grafo estático
+staticMap();
+
+*/

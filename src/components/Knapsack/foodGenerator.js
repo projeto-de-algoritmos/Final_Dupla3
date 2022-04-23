@@ -22,3 +22,10 @@ const generateFoodsPerRegion = (foods) => {
 }
 
 export default generateFoodsPerRegion;
+
+/*
+Passo unico
+
+função para gerar os 15 itens aleatorios para cada regiao
+ela retorna um array com 15 elementos em cada posição, simbolizando o id da regiao
+*/
