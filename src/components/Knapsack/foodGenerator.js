@@ -21,7 +21,7 @@ const generateFoodsPerRegion = (foods) => {
     return foodsPerRegion;
 }
 
-export default generateFoodsPerRegion;
+export default { generateFoodsPerRegion, getRandomFoods };
 
 /*
 Passo unico
