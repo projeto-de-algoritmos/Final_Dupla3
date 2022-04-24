@@ -1,23 +1,3 @@
-const printGraph = (graph) => {
-    const vertices = graph.keys();
-    let finalGraph = "";
-
-    for (let i of vertices) {
-        const nodes = graph.get(i);
-        let conc = "";
-
-        for (let j of nodes) {
-            conc += j.link + " (Distancia-> " + j.distance + ") | ";
-        }
-        finalGraph += "Vértice " + i + " -> Vizinhos: " + conc + "\n";
-    }
-    return finalGraph;
-}
-
-const createGraph = () => {
-    return new Map()
-}
-
 const generateNodes = (graph) => {
     const qtd = 12;
     const nodes = [];
@@ -56,20 +36,6 @@ const staticMap = (graph) => {
     addLink(graph, 12, 2, 0);
 }
 
-
 export default {
-    createGraph, generateNodes, staticMap
+    generateNodes, staticMap
 }
-
-/*
-Passo 1: Gerar grafo
-createGraph()
-
-Passo 2: Gerar Nós (eles já estão com o número fixo pro grafo)
-
-generateNodes()
-
-Passe 3: gerar grafo estático
-staticMap();
-
-*/

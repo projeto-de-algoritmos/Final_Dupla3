@@ -75,7 +75,7 @@ const tableDistances = (graph) => {
     return distances;
 }
 
-export default tableDistances;
+export default { tableDistances };
 
 /* 
 Aqui é só para gerar a tabela de distâncias entre os pontos de acordo com o ponto inicial 0
