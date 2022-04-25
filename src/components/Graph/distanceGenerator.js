@@ -108,7 +108,7 @@ const generateDistances = (graph, qtd) => {
     return distances;
 }
 
-export default generateDistances;
+export default { generateDistances };
 
 /*
 Passo único

@@ -3,7 +3,7 @@ import './App.css';
 import knapSack from "./components/Knapsack/knapSack"
 import graphGenerator from "./components/Graph/graph"
 import foodGenerator from "./components/Knapsack/foodGenerator"
-import tableDistance from "./components/Graph/tableDistance"
+import distanceGenerator from "./components/Graph/distanceGenerator"
 import food from "./data/food"
 import character from "./data/characters"
 import Card from 'react-bootstrap/Card'
@@ -63,6 +63,7 @@ function App() {
                 <button className="graph-button mrg-right-10" type="button" onClick={() => {
                   setShowMap(true); setShowFirstNode(true); setNodes(graphGenerator.generateNodes(graph));
                   graphGenerator.staticMap(graph); setFoods(foodGenerator.generateFoodsPerRegion(food.foods));
+                  setDistances(distanceGenerator.generateDistances(graph, 13))
                 }}>
                   Iniciar jogo
                 </button>
@@ -70,7 +71,7 @@ function App() {
             </div>
             : null}
         </div>
-        {showMap ?
+        {showMap && characters.length === 0 ?
           <div>
             <div className="action">
               <img className="map-image" src={map} usemap="#image-map" />
@@ -90,15 +91,30 @@ function App() {
                 <area target="" alt="Nó 12" title="Nó 12" onClick={() => { setSelectedNode(12) }} href="#" coords="263,256,19" shape="circle" />
               </map>
             </div>
-            <div className="action mrg-top-50">
-              <button className="graph-button mrg-right-10" type="button" onClick={() => { setCharacters(character.characters) }}>
-                Escolher personagem
-              </button>
-            </div>
+            {selectedNode === -1 ?
+              <div className="action mrg-top-50">
+                <button className="graph-button mrg-right-10" type="button" onClick={() => { setCharacters(character.characters); console.log(distances) }}>
+                  Escolher personagem
+                </button>
+              </div>
+              : null}
           </div>
           : null}
         {selectedNode !== -1 && characters.length === 0 && Object.keys(bestDistribution).length === 0 ?
           <div>
+            <div className="action mrg-top-50">
+              <Card border="primary" style={{ width: '18rem' }}>
+                <Card.Body>
+                  <Card.Title>Nó {selectedNode} selecionado</Card.Title>
+                  <Card.Text>
+                    Distância até o Nó 0: {distances[selectedNode - 1]}km
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+            <div className="action mrg-top-50">
+              <span className="result">Itens</span>
+            </div>
             <div className="items">
               {foods[selectedNode]?.map((food) => {
                 return (
@@ -116,6 +132,11 @@ function App() {
                   </div>
                 );
               })}
+            </div>
+            <div className="action mrg-top-50 mrg-btm-20">
+              <button className="graph-button mrg-right-10" type="button" onClick={() => { setCharacters(character.characters); console.log(distances) }}>
+                Escolher personagem
+              </button>
             </div>
           </div> : null}
 
