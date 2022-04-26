@@ -4,6 +4,7 @@ import knapSack from "./components/Knapsack/knapSack"
 import graphGenerator from "./components/Graph/graph"
 import foodGenerator from "./components/Knapsack/foodGenerator"
 import distanceGenerator from "./components/Graph/distanceGenerator"
+import bestRouteGenerator from "./components/bestRoute"
 import food from "./data/food"
 import character from "./data/characters"
 import Card from 'react-bootstrap/Card'
@@ -20,13 +21,11 @@ function App() {
   const [bestDistribution, setBestDistribution] = useState({});
   const [selectedCharacter, setSelectedCharacter] = useState([]);
   const [showMap, setShowMap] = useState(false);
-  const [firstNode, setFirstNode] = useState(0);
-  const [lastNode, setLastNode] = useState(0);
-  const [showFirstNode, setShowFirstNode] = useState(false);
   const [graph, setGraph] = useState([]);
   const [nodes, setNodes] = useState([]);
   const [selectedNode, setSelectedNode] = useState(-1);
   const [distances, setDistances] = useState([]);
+  const [bestRoute, setBestRoute] = useState([]);
 
   useEffect(() => {
     setGraph(new Map());
@@ -62,7 +61,7 @@ function App() {
               </div>
               <div className="action mrg-top-100">
                 <button className="graph-button mrg-right-10" type="button" onClick={() => {
-                  setShowMap(true); setShowFirstNode(true); setNodes(graphGenerator.generateNodes(graph));
+                  setShowMap(true); setNodes(graphGenerator.generateNodes(graph));
                   graphGenerator.staticMap(graph); setFoods(foodGenerator.generateFoodsPerRegion(food.foods));
                   setDistances(distanceGenerator.generateDistances(graph, 13))
                 }}>
@@ -177,20 +176,22 @@ function App() {
               {bestDistribution.map((node, index) => {
                 return (
                   <Tab eventKey={index} title={index}>
-                    <Table style={{ width: '20rem' }} striped bordered hover>
-                      <thead>
-                        <tr>
-                          <th>Quantidade de Vida</th>
-                          <th>Peso da Mochila</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>{node.totalLife}</td>
-                          <td>{node.totalWeight}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
+                    <div className="action">
+                      <Table style={{ width: '20rem' }} striped bordered hover>
+                        <thead>
+                          <tr>
+                            <th>Quantidade de Vida</th>
+                            <th>Peso da Mochila</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{node.totalLife}</td>
+                            <td>{node.totalWeight}</td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </div>
                     <div className="items">
                       {node.selectedFoods?.map((food) => {
                         return (
@@ -213,6 +214,11 @@ function App() {
                 );
               })}
             </Tabs>
+            <div className="action mrg-top-50 mrg-btm-20">
+              <button className="graph-button mrg-right-10" type="button" onClick={() => { setBestRoute(bestRouteGenerator.findBestRoute(distances, bestDistribution)) }}>
+                Visualizar Melhor Rota
+              </button>
+            </div>
           </div> : null}
       </body>
     </div>

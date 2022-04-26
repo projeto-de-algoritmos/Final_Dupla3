@@ -10,6 +10,8 @@ const relationKmLife = (distance, life) => {
 }
 
 const findBestRoute = (minorDistances, bestFoodsPerRegion) => {
+    console.log(minorDistances);
+    console.log(bestFoodsPerRegion);
     let bestRelation = -1000;
     let bestChoice = {};
 
@@ -27,11 +29,12 @@ const findBestRoute = (minorDistances, bestFoodsPerRegion) => {
             }
         }
     }
+    console.log(bestChoice);
     return bestChoice;
 
 }
 
-export default findBestRoute;
+export default { findBestRoute };
 
 /*
 Função final, pega as distancias e as melhores comidas por região.
