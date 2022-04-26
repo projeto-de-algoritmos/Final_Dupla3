@@ -7,6 +7,7 @@ import distanceGenerator from "./components/Graph/distanceGenerator"
 import food from "./data/food"
 import character from "./data/characters"
 import Card from 'react-bootstrap/Card'
+import { Tab, Tabs, Table } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import image from './assets/dontStarve.png'
@@ -134,7 +135,7 @@ function App() {
               })}
             </div>
             <div className="action mrg-top-50 mrg-btm-20">
-              <button className="graph-button mrg-right-10" type="button" onClick={() => { setCharacters(character.characters); console.log(distances) }}>
+              <button className="graph-button mrg-right-10" type="button" onClick={() => { setCharacters(character.characters) }}>
                 Escolher personagem
               </button>
             </div>
@@ -154,7 +155,7 @@ function App() {
                       <ListGroup className="list-group-flush">
                         <ListGroupItem>Mochila: {character.bag}</ListGroupItem>
                       </ListGroup>
-                      <button className="card-button" type="button" onClick={() => { setBestDistribution(knapSack.knapSack(foods, character.bag)); setSelectedCharacter(character) }}>
+                      <button className="card-button" type="button" onClick={() => { setBestDistribution(knapSack.generateKnapSack(foods, character.bag)); setSelectedCharacter(character) }}>
                         Selecionar
                       </button>
                     </Card>
@@ -170,29 +171,48 @@ function App() {
               <img src={selectedCharacter.link} width="200px" />
             </div>
             <div className="action mrg-top-50 mrg-btm-20">
-              <span className="result">{selectedCharacter.name}, de acordo com o tamanho da mochila {selectedCharacter.bag}, os itens possíveis de levar são: </span>
+              <span className="result">{selectedCharacter.name}, de acordo com o tamanho da mochila {selectedCharacter.bag}, os itens possíveis de levar por nó são: </span>
             </div>
-            <div className="items">
-              {bestDistribution.selectedFoods?.map((food) => {
+            <Tabs defaultActiveKey="0" id="uncontrolled-tab-example" className="mb-3">
+              {bestDistribution.map((node, index) => {
                 return (
-                  <div className="action">
-                    <Card style={{ width: '15rem' }}>
-                      <Card.Img style={{ width: '40px' }} variant="top" src={food.link} />
-                      <Card.Body>
-                        <Card.Title>{food.name}</Card.Title>
-                      </Card.Body>
-                      <ListGroup className="list-group-flush">
-                        <ListGroupItem>Vida: {food.life}</ListGroupItem>
-                        <ListGroupItem>Peso: {food.weight}</ListGroupItem>
-                      </ListGroup>
-                    </Card>
-                  </div>
+                  <Tab eventKey={index} title={index}>
+                    <Table style={{ width: '20rem' }} striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Quantidade de Vida</th>
+                          <th>Peso da Mochila</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{node.totalLife}</td>
+                          <td>{node.totalWeight}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                    <div className="items">
+                      {node.selectedFoods?.map((food) => {
+                        return (
+                          <div className="action">
+                            <Card style={{ width: '15rem' }}>
+                              <Card.Img style={{ width: '40px' }} variant="top" src={food.link} />
+                              <Card.Body>
+                                <Card.Title>{food.name}</Card.Title>
+                              </Card.Body>
+                              <ListGroup className="list-group-flush">
+                                <ListGroupItem>Vida: {food.life}</ListGroupItem>
+                                <ListGroupItem>Peso: {food.weight}</ListGroupItem>
+                              </ListGroup>
+                            </Card>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </Tab>
                 );
               })}
-            </div>
-            <div className="action mrg-btm-100">
-              <span className="result">A quantidade de vida que você terá é {bestDistribution.totalLife} e o peso total da sua mochila é de {bestDistribution.totalWeight}</span>
-            </div>
+            </Tabs>
           </div> : null}
       </body>
     </div>

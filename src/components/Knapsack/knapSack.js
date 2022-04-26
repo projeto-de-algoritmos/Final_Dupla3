@@ -72,10 +72,10 @@ const generateKnapSack = (foodsPerRegion, bag_weight) => {
         console.log(knapsack)
         bestKnapsacks.push(knapsack);
     }
-
+    console.log(bestKnapsacks)
     return bestKnapsacks;
 }
-export default generateKnapSack;
+export default { generateKnapSack };
 
 
 /*
