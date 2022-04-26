@@ -44,12 +44,17 @@ Pré-requisitos:
 
 ## Uso 
 É necessário instalar suas dependências usando o comando
-
+```
 yarn install
-
+```
 Para rodar o projeto
+```
 yarn start
+```
 
-O projeto estará rodando na porta localhost:3000
+O projeto estará rodando na porta ```localhost:3000```
 
 ## Vídeo
+[Link youtube](https://youtu.be/qLooTZWdqig)
+
+[Link drive (baixar)](https://drive.google.com/file/d/1lMuI9afKFgmuPbfu8GE7eW-QjefgniDE/view?usp=sharing)
