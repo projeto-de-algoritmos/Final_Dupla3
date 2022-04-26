@@ -24,6 +24,14 @@ No jogo, você terá o seguinte passo a passo:
 
 
 ## Screenshots
+![Screenshot from 2022-04-25 23-53-44](https://user-images.githubusercontent.com/38709421/165210787-e8c91a52-76c8-4cea-b720-a204bab8d329.png)
+![Screenshot from 2022-04-25 23-53-49](https://user-images.githubusercontent.com/38709421/165210795-24daf395-4845-431c-8c13-0b7cafd3b11f.png)
+![Screenshot from 2022-04-25 23-53-58](https://user-images.githubusercontent.com/38709421/165210796-045d5892-b4bd-4672-81bc-b0cb44a60f74.png)
+![Screenshot from 2022-04-25 23-54-07](https://user-images.githubusercontent.com/38709421/165210801-7a6afaaa-39bf-4e1a-83aa-ee731e2f3118.png)
+![Screenshot from 2022-04-25 23-54-13](https://user-images.githubusercontent.com/38709421/165210803-78c122ad-dd10-431c-a280-b3bd86fd1c72.png)
+![Screenshot from 2022-04-25 23-54-21](https://user-images.githubusercontent.com/38709421/165210804-5eb8bb6c-01b1-460d-816c-2fa3319d2fa7.png)
+![Screenshot from 2022-04-25 23-54-26](https://user-images.githubusercontent.com/38709421/165210805-470ad256-8319-4d58-a560-506d45f063af.png)
+
 
 ## Instalação 
 Linguagem: Javascript<br>
