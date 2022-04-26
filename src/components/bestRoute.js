@@ -27,7 +27,7 @@ const findBestRoute = (minorDistances, bestFoodsPerRegion) => {
                 totalLife: bestFoodsPerRegion[i].totalLife,
                 selectedFoods: bestFoodsPerRegion[i].selectedFoods,
                 distance: minorDistances[i],
-                region: i
+                region: i + 1,
             }
         }
     }
