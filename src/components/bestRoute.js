@@ -4,14 +4,10 @@ const relationKmLife = (distance, life) => {
     const possible_km = 5 * life;
     const real_km = possible_km - distance;
 
-    // console.log(possible_km + " - " + distance + " = " + real_km);
-
     return real_km;
 }
 
 const findBestRoute = (minorDistances, bestFoodsPerRegion) => {
-    console.log(minorDistances);
-    console.log(bestFoodsPerRegion);
     let bestRelation = -1000;
     let bestChoice = {};
 
@@ -31,7 +27,6 @@ const findBestRoute = (minorDistances, bestFoodsPerRegion) => {
             }
         }
     }
-    console.log(bestChoice);
     return bestChoice;
 
 }
@@ -40,6 +35,6 @@ export default { findBestRoute };
 
 /*
 Função final, pega as distancias e as melhores comidas por região.
-Faz um relativo da vida e distancia e retorna a melhor opção para o joggador
+Faz um relativo da vida e distancia e retorna a melhor opção para o jogador
 É a resposta final do problema :)
 */

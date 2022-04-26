@@ -46,20 +46,21 @@ function App() {
                 <img src={image} />
               </div>
               <div className="action mrg-top-100">
-                <span className="result">Baseado no jogo <a className="result" href="https://dontstarve.fandom.com/wiki/Don%27t_Starve">Don't Starve Together</a>, em que você é um personagem que precisa sobreviver na floresta, a aplicação consiste em 3 passos:</span>
+                <span className="result">Baseado no jogo <a className="result" href="https://dontstarve.fandom.com/wiki/Don%27t_Starve">Don't Starve Together</a>, em que você é um personagem que precisa sobreviver na floresta, a aplicação consiste em 4 passos:</span>
               </div>
               <div className="steps">
                 <div className="steps-card">
                   <ul className="result">
                     <ol>
-                      <li>Sortear itens que estarão disponíveis para uso</li>
+                      <li>Gerar mapa com itens para cada região (visualizar itens e distância clicando no mapa)</li>
                       <li>Selecionar personagem desejado para o jogo</li>
-                      <li>Visualizar itens possíveis de serem levados de acordo com personagem</li>
+                      <li>Visualizar itens possíveis de serem levados de acordo com personagem e cada região</li>
+                      <li>Encontrar melhor região para ir de acordo com a relação da distância com a quantidade de vida que você adquirá na região.</li>
                     </ol>
                   </ul>
                 </div>
               </div>
-              <div className="action mrg-top-100">
+              <div className="action mrg-top-50 mrg-btm-20">
                 <button className="graph-button mrg-right-10" type="button" onClick={() => {
                   setShowMap(true); setNodes(graphGenerator.generateNodes(graph));
                   graphGenerator.staticMap(graph); setFoods(foodGenerator.generateFoodsPerRegion(food.foods));
@@ -73,6 +74,9 @@ function App() {
         </div>
         {showMap && characters.length === 0 ?
           <div>
+            <div className="action mrg-top-50 mrg-btm-20">
+              <span className="result">Para visualizar itens e distância de cada região, clique em um nó no mapa abaixo:</span>
+            </div>
             <div className="action">
               <img className="map-image" src={map} usemap="#image-map" />
               <map name="image-map">
@@ -92,8 +96,8 @@ function App() {
               </map>
             </div>
             {selectedNode === -1 ?
-              <div className="action mrg-top-50">
-                <button className="graph-button mrg-right-10" type="button" onClick={() => { setCharacters(character.characters); console.log(distances) }}>
+              <div className="action mrg-top-50 mrg-btm-20">
+                <button className="graph-button mrg-right-10" type="button" onClick={() => { setCharacters(character.characters) }}>
                   Escolher personagem
                 </button>
               </div>
@@ -164,13 +168,13 @@ function App() {
             </div>
           </div> : null}
 
-        {Object.keys(bestDistribution).length !== 0 ?
+        {Object.keys(bestDistribution).length !== 0 && Object.keys(bestRoute).length === 0 ?
           <div>
             <div className="action mrg-top-50">
               <img src={selectedCharacter.link} width="200px" />
             </div>
             <div className="action mrg-top-50 mrg-btm-20">
-              <span className="result">{selectedCharacter.name}, de acordo com o tamanho da mochila {selectedCharacter.bag}, os itens possíveis de levar por nó são: </span>
+              <span className="result">{selectedCharacter.name}, de acordo com o tamanho da mochila {selectedCharacter.bag}, os itens possíveis de levar por região são: </span>
             </div>
             <Tabs defaultActiveKey="0" id="uncontrolled-tab-example" className="mb-3">
               {bestDistribution.map((node, index) => {
@@ -216,8 +220,62 @@ function App() {
             </Tabs>
             <div className="action mrg-top-50 mrg-btm-20">
               <button className="graph-button mrg-right-10" type="button" onClick={() => { setBestRoute(bestRouteGenerator.findBestRoute(distances, bestDistribution)) }}>
-                Visualizar Melhor Rota
+                Encontrar Melhor Regiao
               </button>
+            </div>
+          </div> : null}
+
+        {Object.keys(bestRoute).length !== 0 ?
+          <div>
+            <div className="action mrg-top-50">
+              <img className="map-image" src={map} usemap="#image-map" />
+            </div>
+            <div className="action mrg-top-50 mrg-btm-20">
+              <span className="result">A melhor região para ir é a de número {bestRoute.region}. Para chegar nela você andará {bestRoute.distance}km</span>
+            </div>
+            <div>
+              <div className="action">
+                <Table style={{ width: '20rem' }} striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Quantidade de Vida</th>
+                      <th>Peso da Mochila</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{bestRoute.totalLife}</td>
+                      <td>{bestRoute.totalWeight}</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+              <div className="action mrg-top-50 mrg-btm-20">
+                <span className="result">Itens Selecionados</span>
+              </div>
+              <div className="items">
+                {bestRoute.selectedFoods?.map((food) => {
+                  return (
+                    <div className="action">
+                      <Card style={{ width: '15rem' }}>
+                        <Card.Img style={{ width: '40px' }} variant="top" src={food.link} />
+                        <Card.Body>
+                          <Card.Title>{food.name}</Card.Title>
+                        </Card.Body>
+                        <ListGroup className="list-group-flush">
+                          <ListGroupItem>Vida: {food.life}</ListGroupItem>
+                          <ListGroupItem>Peso: {food.weight}</ListGroupItem>
+                        </ListGroup>
+                      </Card>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="action mrg-top-50 mrg-btm-20">
+                <span className="result">Criamos uma relação da distância com a quantidade de vida que você adquirá na região.
+
+                  Para cada vida, você consegue percorrer 5 km, então considerando a quantidade de vida adquirida nesta região e a distância percorrida, seu personagem conseguirá chegar ao seu destino e ainda percorrer {bestRoute.bestRelation}km.</span>
+              </div>
             </div>
           </div> : null}
       </body>
